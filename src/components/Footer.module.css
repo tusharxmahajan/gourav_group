@@ -1,0 +1,139 @@
+.footer {
+  --focus: #fff;
+  display: grid;
+  grid-template-columns: var(--bleed);
+  background: var(--ink);
+  color: #fff;
+}
+
+.content {
+  grid-row: 1;
+  grid-column: full;
+  display: grid;
+  grid-template-columns: var(--bleed);
+}
+
+.cta {
+  grid-column: content;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px 40px;
+  padding: var(--space-footer-top) var(--pad) var(--space-footer-bottom);
+}
+
+.title {
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.outline,
+.solid {
+  padding: 16px 20px;
+  white-space: nowrap;
+}
+
+.outline {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-weight: 500;
+}
+
+.solid {
+  background: #fff;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.offices {
+  grid-column: content;
+  width: calc(100% + 1px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-right: 1px solid var(--dark-line);
+  font-family: var(--font-sub);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--dark-text-2);
+}
+
+.office {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 32px var(--pad) 40px;
+  background: var(--ink);
+  border-left: 1px solid var(--dark-line);
+}
+
+.officeName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  color: #fff;
+}
+
+.swatch {
+  flex: none;
+  width: 8px;
+  height: 8px;
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bottom {
+  grid-column: content;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding: 24px var(--pad);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--dark-text-3);
+}
+
+.social {
+  display: flex;
+  gap: 24px;
+  color: var(--dark-text-2);
+}
+
+@media (max-width: 767px) {
+  .cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .offices {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .office + .office {
+    border-top: 1px solid var(--dark-line);
+  }
+}

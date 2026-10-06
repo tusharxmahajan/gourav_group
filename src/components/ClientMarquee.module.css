@@ -1,0 +1,100 @@
+.band {
+  display: grid;
+  grid-template-columns: var(--bleed);
+  background: var(--surface);
+}
+
+.frame {
+  grid-column: content;
+  width: calc(100% + 1px);
+  border-inline: 1px solid var(--line);
+}
+
+.viewport {
+  --fade: 120px;
+  --mask: linear-gradient(90deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+  overflow: hidden;
+  padding: 40px 0;
+  -webkit-mask-image: var(--mask);
+  mask-image: var(--mask);
+}
+
+.track {
+  --gap: 72px;
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  width: max-content;
+  animation: marquee 55s linear infinite;
+}
+
+.band:hover .track {
+  animation-play-state: paused;
+}
+
+/* One list plus one gap is exactly half the track plus half a gap. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - var(--gap) / 2));
+  }
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  flex: none;
+}
+
+.list > li {
+  display: flex;
+}
+
+.logo {
+  height: var(--h);
+  width: auto;
+  max-width: none;
+}
+
+@media (max-width: 767px) {
+  .viewport {
+    --fade: 48px;
+    padding: 28px 0;
+  }
+
+  .track {
+    --gap: 48px;
+  }
+
+  .logo {
+    height: calc(var(--h) * 0.8);
+  }
+}
+
+/* Static, wrapped, centred row. */
+@media (prefers-reduced-motion: reduce) {
+  .viewport {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .track {
+    width: auto;
+    padding-inline: var(--pad);
+    animation: none;
+  }
+
+  .list {
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 32px;
+  }
+
+  .list[data-duplicate] {
+    display: none;
+  }
+}

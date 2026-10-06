@@ -1,0 +1,48 @@
+.section {
+  display: grid;
+  grid-template-columns: var(--bleed);
+  padding-bottom: var(--space-section);
+}
+
+.header {
+  grid-column: content;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px 24px;
+  padding: var(--space-section) var(--pad) 40px;
+}
+
+.title {
+  composes: section-title from global;
+}
+
+.catalogue {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Cells share borders: each card draws its left and bottom edge, the row its
+   right edge. The -1px tucks the last row's bottom edge under the next rule. */
+.cards {
+  grid-column: content;
+  width: calc(100% + 1px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-right: 1px solid var(--line);
+  margin-bottom: -1px;
+}
+
+@media (max-width: 1023px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

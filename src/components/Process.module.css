@@ -1,0 +1,103 @@
+.section {
+  display: grid;
+  grid-template-columns: var(--bleed);
+  padding-bottom: var(--space-section);
+}
+
+.header {
+  grid-column: content;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  padding: var(--space-section) 0 40px;
+}
+
+.title {
+  composes: section-title from global;
+  padding: 0 var(--pad);
+}
+
+.intro {
+  max-width: calc(540px + 2 * var(--pad));
+  padding: 0 var(--pad);
+  font-family: var(--font-sub);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* Shared borders, as in Products: cells draw left + bottom, the row draws
+   the right edge, and the last bottom edge tucks under the next rule. */
+.steps {
+  grid-column: content;
+  width: calc(100% + 1px);
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  border-right: 1px solid var(--line);
+  margin-bottom: -1px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: var(--pad);
+  background: var(--surface);
+  border-left: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.step[data-dark] {
+  background: var(--ink);
+  color: #fff;
+  border-left-color: var(--ink);
+}
+
+.label {
+  composes: mono-label from global;
+  color: var(--muted);
+}
+
+.stepTitle {
+  min-height: 44px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.bar {
+  display: flex;
+  height: 4px;
+}
+
+.bar > span {
+  flex: 1;
+}
+
+.by {
+  font-family: var(--font-sub);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.step[data-dark] .label,
+.step[data-dark] .by {
+  color: var(--dark-text-4);
+}
+
+@media (max-width: 1023px) {
+  .header {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 20px;
+  }
+
+  .steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

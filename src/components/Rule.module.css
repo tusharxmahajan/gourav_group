@@ -1,0 +1,44 @@
+/* 13px tall so the crosshairs fit, pulled in to a net height of 1px. */
+.rule {
+  grid-column: full;
+  display: grid;
+  grid-template-columns: var(--bleed);
+  height: 13px;
+  margin-block: -6px;
+  background: linear-gradient(var(--rule-line), var(--rule-line)) 0 6px / 100% 1px no-repeat;
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
+}
+
+/* Spans the container plus half a crosshair on each side; the crosshairs
+   centre on the first and last guide lines. Each crosshair is a 13px
+   vertical bar plus two 6px arms, so a translucent colour never doubles
+   up on the centre pixel. */
+.marks {
+  --x: linear-gradient(var(--rule-cross), var(--rule-cross));
+  grid-column: content;
+  margin-inline: -6px -7px;
+  background:
+    var(--x) 6px 0 / 1px 13px no-repeat,
+    var(--x) 0 6px / 6px 1px no-repeat,
+    var(--x) 7px 6px / 6px 1px no-repeat,
+    var(--x) right 6px top 0 / 1px 13px no-repeat,
+    var(--x) right 7px top 6px / 6px 1px no-repeat,
+    var(--x) right 0 top 6px / 6px 1px no-repeat;
+}
+
+.light {
+  --rule-line: var(--line);
+  --rule-cross: var(--cross-light);
+}
+
+.dark {
+  --rule-line: var(--dark-line);
+  --rule-cross: var(--cross-dark);
+}
+
+.hero {
+  --rule-line: var(--hero-line);
+  --rule-cross: var(--cross-hero);
+}

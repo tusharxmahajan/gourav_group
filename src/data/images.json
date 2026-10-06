@@ -1,0 +1,89 @@
+{
+  "/images/hero/slide-1.webp": {
+    "width": 1024,
+    "height": 767,
+    "sources": [
+      {
+        "type": "image/avif",
+        "srcset": "/images/hero/slide-1-640.avif 640w, /images/hero/slide-1-960.avif 960w, /images/hero/slide-1-1024.avif 1024w"
+      },
+      {
+        "type": "image/webp",
+        "srcset": "/images/hero/slide-1-640.webp 640w, /images/hero/slide-1-960.webp 960w, /images/hero/slide-1-1024.webp 1024w"
+      }
+    ]
+  },
+  "/images/hero/slide-2.webp": {
+    "width": 1024,
+    "height": 682,
+    "sources": [
+      {
+        "type": "image/avif",
+        "srcset": "/images/hero/slide-2-640.avif 640w, /images/hero/slide-2-960.avif 960w, /images/hero/slide-2-1024.avif 1024w"
+      },
+      {
+        "type": "image/webp",
+        "srcset": "/images/hero/slide-2-640.webp 640w, /images/hero/slide-2-960.webp 960w, /images/hero/slide-2-1024.webp 1024w"
+      }
+    ]
+  },
+  "/images/hero/slide-3.webp": {
+    "width": 1600,
+    "height": 755,
+    "sources": [
+      {
+        "type": "image/avif",
+        "srcset": "/images/hero/slide-3-640.avif 640w, /images/hero/slide-3-960.avif 960w, /images/hero/slide-3-1280.avif 1280w, /images/hero/slide-3-1920.avif 1920w, /images/hero/slide-3-2560.avif 2560w"
+      },
+      {
+        "type": "image/webp",
+        "srcset": "/images/hero/slide-3-640.webp 640w, /images/hero/slide-3-960.webp 960w, /images/hero/slide-3-1280.webp 1280w, /images/hero/slide-3-1920.webp 1920w, /images/hero/slide-3-2560.webp 2560w"
+      }
+    ]
+  },
+  "/images/clients/piaggio.png": {
+    "width": 225,
+    "height": 60,
+    "sources": []
+  },
+  "/images/clients/bharat-forge.png": {
+    "width": 220,
+    "height": 62,
+    "sources": []
+  },
+  "/images/clients/aam.png": {
+    "width": 92,
+    "height": 100,
+    "sources": []
+  },
+  "/images/clients/ferrero.png": {
+    "width": 325,
+    "height": 42,
+    "sources": []
+  },
+  "/images/clients/balaji.png": {
+    "width": 129,
+    "height": 100,
+    "sources": []
+  },
+  "/images/clients/jubilant.png": {
+    "width": 145,
+    "height": 94,
+    "sources": []
+  },
+  "/images/clients/pepsico.png": {
+    "width": 242,
+    "height": 56,
+    "sources": []
+  },
+  "/images/clients/coca-cola.png": {
+    "width": 210,
+    "height": 66,
+    "sources": []
+  },
+  "/images/clients/saint-gobain.png": {
+    "width": 179,
+    "height": 74,
+    "sources": []
+  }
+}

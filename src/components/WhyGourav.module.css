@@ -1,0 +1,180 @@
+.section {
+  --focus: #fff;
+  display: grid;
+  grid-template-columns: var(--bleed);
+  background: var(--ink);
+  color: #fff;
+}
+
+.content {
+  grid-row: 1;
+  grid-column: full;
+  display: grid;
+  grid-template-columns: var(--bleed);
+  padding-bottom: var(--space-section);
+}
+
+.header {
+  grid-column: content;
+  padding: var(--space-section) var(--pad) 40px;
+}
+
+.title {
+  composes: section-title from global;
+}
+
+.bento {
+  grid-column: content;
+  width: calc(100% + 1px);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: 220px 220px;
+  border-right: 1px solid var(--dark-line);
+}
+
+.feature {
+  grid-column: span 2;
+  grid-row: span 2;
+  display: grid;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--dark-cell);
+  border-left: 1px solid var(--dark-line);
+}
+
+/* Diagonal hatching behind the content, strongest at the top right. */
+.hatch {
+  --mask: linear-gradient(to bottom left, #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 80%);
+  grid-area: 1 / 1;
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px 9px);
+  -webkit-mask-image: var(--mask);
+  mask-image: var(--mask);
+}
+
+/* z-index lifts the content above the masked (and so stacked) hatch layer. */
+.featureBody {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 32px var(--pad);
+  position: relative;
+  z-index: 1;
+}
+
+.featureLabel {
+  composes: mono-label from global;
+  color: var(--dark-text-4);
+}
+
+.featureStat {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stat {
+  font-size: 112px;
+  line-height: 0.9;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+}
+
+.unit {
+  font-size: 40px;
+  letter-spacing: -0.02em;
+  color: var(--dark-text-4);
+}
+
+.featureText {
+  max-width: 420px;
+  font-family: var(--font-sub);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--dark-text-5);
+}
+
+.point {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding: var(--pad);
+  background: var(--ink);
+  border-left: 1px solid var(--dark-line);
+}
+
+/* Top-row cells (the feature is child 1). */
+.point:nth-child(-n + 3) {
+  border-bottom: 1px solid var(--dark-line);
+}
+
+.pointNumber {
+  composes: mono-label from global;
+  color: var(--dark-text-3);
+}
+
+.pointBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pointTitle {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Plain wrapping, as in the design ("…civil works and / erection."). */
+.pointText {
+  text-wrap: wrap;
+  font-family: var(--font-sub);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--dark-text-2);
+}
+
+@media (max-width: 1023px) {
+  .bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-auto-rows: minmax(200px, auto);
+  }
+
+  .feature {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: 320px;
+  }
+
+  .point,
+  .point:nth-child(-n + 3) {
+    border-top: 1px solid var(--dark-line);
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .bento {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: auto;
+  }
+
+  .feature {
+    min-height: 300px;
+  }
+
+  .point {
+    min-height: 160px;
+  }
+
+  .stat {
+    font-size: 72px;
+  }
+
+  .unit {
+    font-size: 26px;
+  }
+}

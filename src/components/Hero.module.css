@@ -1,0 +1,257 @@
+.hero {
+  --focus: #fff;
+  display: grid;
+  grid-template-columns: var(--bleed);
+  grid-template-rows: minmax(0, 1fr);
+  height: var(--hero-h);
+  overflow: hidden;
+  /* Pinned: the content after the hero scrolls up over it. */
+  position: sticky;
+  top: var(--hero-pin);
+  isolation: isolate;
+  background: var(--ink);
+  color: #fff;
+}
+
+/* Layers, all stacked in row 1: slides, scrims, content. */
+.slide,
+.scrim,
+.scrimTop,
+.content {
+  grid-row: 1;
+  grid-column: full;
+}
+
+.slide {
+  display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  position: relative;
+  z-index: 0;
+}
+
+.slide[data-active='true'] {
+  opacity: 1;
+}
+
+.slideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scrim,
+.scrimTop {
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
+}
+
+.scrim {
+  background: linear-gradient(
+    180deg,
+    rgba(18, 19, 20, 0.72) 0%,
+    rgba(18, 19, 20, 0.15) 34%,
+    rgba(18, 19, 20, 0.1) 55%,
+    rgba(18, 19, 20, 0.85) 100%
+  );
+}
+
+.scrimTop {
+  align-self: start;
+  height: 300px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.28) 55%, rgba(0, 0, 0, 0) 100%);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: var(--bleed);
+  /* header band / rule / headline / spacer / tagline / rule / tab strip */
+  grid-template-rows: 80px auto auto minmax(0, 1fr) auto auto 96px;
+  position: relative;
+  z-index: 2;
+}
+
+.topRule {
+  grid-row: 2;
+}
+
+/* 48px below the header line, less the 1px the rule occupies. */
+.title {
+  grid-row: 3;
+  grid-column: content;
+  padding: 47px var(--pad) 0;
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-weight: 600;
+}
+
+/* One block per headline line, so each can animate in on its own. */
+.line {
+  display: block;
+}
+
+/* 32px above the tab strip, less the 1px rule. */
+.taglineRow {
+  grid-row: 5;
+  grid-column: content;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  padding: 0 var(--pad) 31px;
+}
+
+.tagline {
+  max-width: 760px;
+  font-family: var(--font-sub);
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+
+.arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.arrow {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--hero-border);
+  font-size: 18px;
+}
+
+.arrow:hover {
+  background: var(--hero-hover);
+}
+
+.bottomRule {
+  grid-row: 6;
+}
+
+.tabs {
+  grid-row: 7;
+  grid-column: content;
+  width: calc(100% + 1px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-right: 1px solid var(--hero-line);
+}
+
+.tab {
+  display: grid;
+  border-left: 1px solid var(--hero-line);
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.3s;
+}
+
+.tab[aria-selected='true'] {
+  color: #fff;
+}
+
+/* The tab strip sits on the hero's clipped bottom edge, so draw the ring inside. */
+.tab:focus-visible {
+  outline-offset: -2px;
+}
+
+/* Progress track: a grid-stacked row along the top edge, pulled up 1px so
+   the fill covers the rule line. */
+.track {
+  grid-area: 1 / 1;
+  align-self: start;
+  display: flex;
+  height: 2px;
+  margin-top: -1px;
+  position: relative;
+  z-index: 2;
+}
+
+.fill {
+  width: 0;
+  background: #fff;
+  animation: fill var(--interval) linear forwards;
+}
+
+.fill[data-running='false'] {
+  animation-play-state: paused;
+}
+
+@keyframes fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.tabText {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 var(--pad);
+}
+
+.tabNumber {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.tabName {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: 34px;
+  }
+
+  .taglineRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .tagline {
+    font-size: 18px;
+  }
+
+}
+
+@media (max-width: 479px) {
+  .tabText {
+    gap: 0;
+  }
+
+  /* Names hidden visually; still the tabs' accessible names. */
+  .tabName {
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide,
+  .tab {
+    transition: none;
+  }
+
+  .fill {
+    animation: none;
+    width: 100%;
+  }
+}

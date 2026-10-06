@@ -1,0 +1,25 @@
+/* Sits on the container column and runs 1px past it, so the last guide
+   lands on the container's right edge, where row frames draw their
+   border-right. */
+.guides {
+  grid-row: 1;
+  grid-column: content;
+  width: calc(100% + 1px);
+  pointer-events: none;
+  background:
+    linear-gradient(var(--guide-color), var(--guide-color)) 100% 0 / 1px 100% no-repeat,
+    repeating-linear-gradient(90deg, var(--guide-color) 0 1px, transparent 1px var(--col)) 0 0 / calc(100% - 1px) 100%
+      no-repeat;
+}
+
+.light {
+  --guide-color: var(--guide);
+}
+
+.dark {
+  --guide-color: var(--dark-guide);
+}
+
+.hero {
+  --guide-color: var(--hero-guide);
+}

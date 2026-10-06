@@ -1,0 +1,100 @@
+:root {
+  /* Surfaces & text */
+  --bg: #f6f6f4;
+  --surface: #ffffff;
+  --ink: #121314;
+  --ink-2: #4b4e53;
+  --ink-3: #5d6066;
+  --muted: #63666b;
+  --muted-2: #a3a6aa;
+  --line: #e3e3df;
+  --line-soft: #efefec;
+  --line-chip: #ebebe7;
+  --guide: #e5e5e1;
+  --media: #e4e4e1;
+  --dark-cell: #1b1c1e;
+  --dark-text-2: #a6a9ad;
+  --dark-text-3: #7d8085;
+  --dark-text-4: #9a9da2;
+  --dark-text-5: #c3c5c9;
+
+  /* Lines on dark and on the hero photo */
+  --dark-line: rgba(255, 255, 255, 0.14);
+  --dark-guide: rgba(255, 255, 255, 0.08);
+  --hero-line: rgba(255, 255, 255, 0.2);
+  --hero-guide: rgba(255, 255, 255, 0.13);
+  --hero-border: rgba(255, 255, 255, 0.35);
+  --hero-hover: rgba(255, 255, 255, 0.12);
+
+  /* Rule crosshairs */
+  --cross-light: #8f918e;
+  --cross-dark: #6f7276;
+  --cross-hero: rgba(255, 255, 255, 0.7);
+
+  /* Division colours: same lightness/chroma, different hue */
+  --c-industries: oklch(0.55 0.15 255);
+  --c-industries-text: oklch(0.48 0.15 255);
+  --c-engineers: oklch(0.55 0.15 35);
+  --c-engineers-text: oklch(0.48 0.15 35);
+  --c-process: oklch(0.55 0.15 170);
+  --c-process-text: oklch(0.48 0.15 170);
+
+  /* Type */
+  --font-sans: 'Geist Variable', system-ui, sans-serif;
+  --font-sub: 'Instrument Sans Variable', sans-serif;
+  --font-mono: 'Geist Mono Variable', monospace;
+
+  /* Grid system */
+  --gutter: 40px;
+  --cols: 12;
+  --pad: 24px;
+  --container: min(1200px, 100% - 2 * var(--gutter));
+  /* Full-bleed grid: gutter | container | gutter. Use `grid-column: content` or `full`. */
+  --bleed: [full-start] minmax(0, 1fr) [content-start] var(--container) [content-end] minmax(0, 1fr) [full-end];
+  /* Width of N guide columns, for grids whose cells must land on the guides */
+  --col: calc(100% / var(--cols));
+
+  /* Vertical rhythm */
+  --space-section: 104px;
+  --space-footer-top: 96px;
+  --space-footer-bottom: 56px;
+
+  /* Hero height, and the sticky offset that pins it (with the header) while
+     the rest of the page scrolls over it. On viewports shorter than the
+     hero's 640px minimum it pins once its bottom edge is in view. */
+  --hero-h: clamp(640px, 100vh, 880px);
+  --hero-pin: min(0px, 100vh - var(--hero-h));
+
+  --focus: var(--ink);
+}
+
+@supports (height: 100svh) {
+  :root {
+    --hero-h: clamp(640px, 100svh, 880px);
+    --hero-pin: min(0px, 100svh - var(--hero-h));
+  }
+}
+
+/* Tablet. 6 columns (not 8) so the 3-up rows (hero tabs, process steps,
+   offices) and 2-up rows both land on the guides. */
+@media (max-width: 1023px) {
+  :root {
+    --gutter: 24px;
+    --cols: 6;
+    --pad: 20px;
+    --space-section: 88px;
+    --space-footer-top: 80px;
+    --space-footer-bottom: 48px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --gutter: 16px;
+    --cols: 4;
+    --pad: 16px;
+    --space-section: 72px;
+    --space-footer-top: 64px;
+    --space-footer-bottom: 40px;
+  }
+}

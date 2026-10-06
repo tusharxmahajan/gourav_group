@@ -1,0 +1,76 @@
+.section {
+  display: grid;
+  grid-template-columns: var(--bleed);
+  padding-bottom: var(--space-section);
+}
+
+/* Label cell is 3 guide columns wide (300px at desktop). */
+.row {
+  grid-column: content;
+  width: calc(100% + 1px);
+  display: grid;
+  grid-template-columns: calc(var(--col) * 3) minmax(0, 1fr);
+  border-right: 1px solid var(--line);
+  margin-bottom: -1px;
+}
+
+.labelCell,
+.quoteCell {
+  background: var(--surface);
+  border-left: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+/* The label is an inline span, so it sits on the cell's default 16px line box. */
+.labelCell {
+  padding: 40px var(--pad);
+}
+
+.label {
+  composes: mono-label from global;
+  color: var(--muted);
+}
+
+.quoteCell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 40px var(--pad) 48px;
+}
+
+.quote {
+  font-size: 44px;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+}
+
+.more {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 1023px) {
+  .row {
+    grid-template-columns: calc(var(--col) * 2) minmax(0, 1fr);
+  }
+
+  .quote {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 767px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .labelCell {
+    padding-block: 24px;
+  }
+
+  .quote {
+    font-size: 28px;
+  }
+}

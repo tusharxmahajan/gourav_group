@@ -1,0 +1,164 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-left: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+/* Image with grid-stacked scrim, division bar and title. */
+.media {
+  display: grid;
+  grid-template: 240px / minmax(0, 1fr);
+  overflow: hidden;
+  background: var(--media);
+  border-bottom: 1px solid var(--line);
+}
+
+.media > * {
+  grid-area: 1 / 1;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scrim {
+  background: linear-gradient(180deg, rgba(18, 19, 20, 0) 40%, rgba(18, 19, 20, 0.72) 100%);
+}
+
+.bar {
+  align-self: end;
+  height: 2px;
+  background: var(--c);
+}
+
+.title {
+  align-self: end;
+  padding: 0 var(--pad) 24px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px var(--pad) 8px;
+}
+
+.subtitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.description {
+  font-family: var(--font-sub);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  padding: 8px var(--pad) 24px;
+  font-size: 14px;
+}
+
+.links[data-tight] {
+  padding-bottom: 16px;
+}
+
+.link {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+}
+
+.links > li:not(:last-child) > .link {
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.link:hover {
+  opacity: 0.6;
+}
+
+.arrow {
+  color: var(--muted-2);
+}
+
+.sectorsInset {
+  padding: 0 var(--pad) 24px;
+}
+
+.sectors {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  background: var(--bg);
+  border: 1px solid var(--line-chip);
+}
+
+.sectorsLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.chip {
+  padding: 5px 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+/* margin-top: auto pins the CTA to the bottom of equal-height cards.
+   Uses the darker --c-text shade: the base process teal on white (and
+   white on it) is only 4.25:1, under AA for 14px text. */
+.cta {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 20px var(--pad);
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--c-text);
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+@media (hover: hover) {
+  .card:hover .cta {
+    background: var(--c-text);
+    color: #fff;
+  }
+}
+
+.card:focus-within .cta,
+.cta:active,
+.cta:focus-visible {
+  background: var(--c-text);
+  color: #fff;
+}
