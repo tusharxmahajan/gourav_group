@@ -22,12 +22,12 @@ const CLEAR = 'opacity,visibility,transform';
  *   data-reveal-bar                    (in a cell) bar grows from the left
  */
 
-function intro(root) {
+function intro(root, delay) {
   const header = root.querySelectorAll('[data-intro="header"]');
   const items = root.querySelectorAll('[data-intro]:not([data-intro="header"])');
 
   gsap
-    .timeline({ defaults: { ease: EASE } })
+    .timeline({ delay, defaults: { ease: EASE } })
     .from(header, { autoAlpha: 0, y: -16, duration: 0.8, clearProps: CLEAR }, 0.2)
     .from(items, { autoAlpha: 0, y: 36, duration: 1, stagger: 0.12, clearProps: CLEAR }, 0.3);
 }
@@ -87,14 +87,14 @@ function cells(root) {
   });
 }
 
-/** Hero entrance + scroll reveals for everything inside `scope`. */
-export default function useRevealAnimations(scope) {
+/** Hero entrance (after `introDelay` seconds) + scroll reveals for everything inside `scope`. */
+export default function useRevealAnimations(scope, { introDelay = 0 } = {}) {
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         const root = scope.current;
-        intro(root);
+        intro(root, introDelay);
         groups(root);
         cells(root);
         // Web fonts can change section heights; re-measure trigger points.

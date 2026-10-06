@@ -1,0 +1,98 @@
+/* Shares the page grid's first cell (like the header) and sticks to the
+   viewport, above everything, until it wipes away. */
+.preloader {
+  grid-area: 1 / 1;
+  align-self: start;
+  display: grid;
+  grid-template-columns: var(--bleed);
+  height: 100vh;
+  height: 100svh;
+  background: var(--ink);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  /* Own compositor layer for the slide-up exit. */
+  will-change: transform;
+}
+
+.content {
+  grid-column: content;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto auto;
+  border-inline: 1px solid var(--dark-line);
+}
+
+.mark {
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.bars {
+  display: flex;
+  gap: 6px;
+}
+
+.bars > span {
+  width: 16px;
+  height: 48px;
+}
+
+.wordmark {
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--pad) 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--dark-text-4);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The bottom gridline doubles as the progress bar. */
+.track {
+  display: flex;
+  height: 1px;
+  margin-bottom: 40px;
+  background: var(--dark-line);
+}
+
+.progress {
+  flex: 1;
+  background: #fff;
+  transform-origin: left center;
+}
+
+@media (max-width: 767px) {
+  .bars > span {
+    width: 10px;
+    height: 32px;
+  }
+
+  .bars {
+    gap: 4px;
+  }
+
+  .mark {
+    gap: 14px;
+  }
+
+  .wordmark {
+    font-size: 28px;
+  }
+
+  .track {
+    margin-bottom: 24px;
+  }
+}

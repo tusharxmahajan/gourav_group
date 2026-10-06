@@ -20,14 +20,14 @@ function isFocusVisible(el) {
   }
 }
 
-export default function Hero({ covered = false }) {
+export default function Hero({ paused = false }) {
   const { slides } = hero;
   const reducedMotion = usePrefersReducedMotion();
   const [keyboardInside, setKeyboardInside] = useState(false);
   const { index, go, next, prev, cycle, running } = useCarousel(slides.length, INTERVAL, {
     autoplay: !reducedMotion,
-    // Also paused while the page has scrolled over the pinned hero.
-    paused: keyboardInside || covered,
+    // Also paused from outside: preloader showing, or page scrolled over the hero.
+    paused: keyboardInside || paused,
   });
   const tabs = useRef([]);
   const slideEls = useRef([]);

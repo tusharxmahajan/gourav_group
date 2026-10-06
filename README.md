@@ -55,6 +55,13 @@ Both pieces of motion are off entirely under `prefers-reduced-motion`. Users who
 - **Touch scrolling stays native.**
 - **In-page links glide via Lenis** (nav, skip link, mobile menu), and focus moves to the target.
 
+**Preloader** (`components/Preloader.jsx`, timings in `lib/preloader.js`). A 2.75s full-screen panel:
+
+- the division bars grow in, the wordmark rises, and a counter and gridline run to 100 over 1.75s;
+- the panel then slides up over 1s to uncover the hero, and the hero entrance starts as it lifts;
+- while it shows, the page underneath is `inert`, Lenis is stopped and the carousel is held;
+- it's skipped under reduced motion.
+
 **Hero photo zoom.** The active photo scales from 1.1 down to 1 over its 6s slide, restarting on each tab change and pausing with the progress bar (Web Animations API, in `Hero.jsx`).
 
 **Reveals: GSAP + ScrollTrigger.** Set up in `hooks/useRevealAnimations.js`. Components opt in with data attributes:

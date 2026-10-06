@@ -9,6 +9,13 @@
       content="Gourav Group: pre-engineered buildings and roofing, industrial civil and mechanical works, and dairy and food-processing plants — from one group, since 1992."
     />
     <meta name="theme-color" content="#121314" />
+    <!-- Dark until React mounts the preloader, so there's no light flash. -->
+    <style>
+      #root:empty {
+        min-height: 100vh;
+        background: #121314;
+      }
+    </style>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>

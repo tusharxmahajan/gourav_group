@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 import gsap from 'gsap';
@@ -21,12 +21,16 @@ const OPTIONS = {
  * Lenis smooth scrolling, driven by GSAP's ticker so ScrollTrigger reads the
  * same scroll position on every frame. In-page links (#products, the skip
  * link, the mobile menu) glide via Lenis, and focus moves to the target.
+ * While `locked` (the preloader), scrolling is stopped.
  */
-export default function useSmoothScroll(enabled = true) {
+export default function useSmoothScroll(enabled = true, locked = false) {
+  const instance = useRef(null);
+
   useEffect(() => {
     if (!enabled) return undefined;
 
     const lenis = new Lenis(OPTIONS);
+    instance.current = lenis;
     lenis.on('scroll', ScrollTrigger.update);
     const tick = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(tick);
@@ -52,6 +56,14 @@ export default function useSmoothScroll(enabled = true) {
       gsap.ticker.remove(tick);
       gsap.ticker.lagSmoothing(500, 33);
       lenis.destroy();
+      instance.current = null;
     };
   }, [enabled]);
+
+  useEffect(() => {
+    const lenis = instance.current;
+    if (!lenis) return;
+    if (locked) lenis.stop();
+    else lenis.start();
+  }, [enabled, locked]);
 }

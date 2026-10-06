@@ -119,6 +119,7 @@ export const ui = {
   clients: 'Our clients',
   explore: 'Explore',
   sectors: 'SECTORS SERVED',
+  loading: 'LOADING',
 };
 
 // Section anchors the nav links can jump to.
